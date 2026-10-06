@@ -1,0 +1,36 @@
+# --- Python: байткод и кэш интерпретатора ---
+__pycache__/
+*.py[cod]
+
+# --- Виртуальное окружение ---
+.venv/
+venv/
+
+# --- Переменные окружения и секреты ---
+.env
+.env.*
+!.env.example
+
+# --- Логи приложения (core/logging_config.py пишет в logs/app.log) ---
+logs/
+*.log
+
+# --- Кэши инструментов разработки (ruff, mypy, pytest) ---
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+
+# --- Тестовое покрытие ---
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# --- IDE и редакторы ---
+.vscode/
+.idea/
+*.swp
+*~
+
+# --- macOS ---
+.DS_Store
