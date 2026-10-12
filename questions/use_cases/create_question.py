@@ -2,9 +2,7 @@ from questions.infrastructure.repositories.question_repository import QuestionRe
 from questions.infrastructure.models import QuestionModel
 
 
-
 class CreateQuestionUseCase:
-
     def __init__(self, repository: QuestionRepository):
         self.repository = repository
 

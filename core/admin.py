@@ -9,6 +9,7 @@ class QuestionAdmin(ModelView, model=QuestionModel):
     column_list = [QuestionModel.id, QuestionModel.question]
     form_columns = [QuestionModel.question]
 
+
 def setup_admin(app: FastAPI) -> None:
     admin = Admin(app, engine)
     admin.add_view(QuestionAdmin)

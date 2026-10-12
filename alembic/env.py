@@ -5,8 +5,10 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from core.database import Base 
+from core.database import Base
 from questions.infrastructure.models import QuestionModel
+from users.infrastructure.models import UsersModel
+from answers.infrastructure.model import AnswerModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -52,6 +54,7 @@ def run_migrations_offline() -> None:
     with context.begin_transaction():
         context.run_migrations()
 
+
 import asyncio
 
 
@@ -78,6 +81,7 @@ def do_run_migrations(connection):
 
 def run_migrations_online() -> None:
     asyncio.run(run_async_migrations())
+
 
 if context.is_offline_mode():
     run_migrations_offline()

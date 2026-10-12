@@ -9,7 +9,9 @@ from sqlalchemy.orm import DeclarativeBase
 DATABASE_URL = "postgresql+asyncpg://anna@localhost:5432/reflection_db"
 
 
-engine = create_async_engine(DATABASE_URL, echo=True)  # echo=True: SQL в консоль, потом можно убрать
+engine = create_async_engine(
+    DATABASE_URL, echo=True
+)  # echo=True: SQL в консоль, потом можно убрать
 
 
 AsyncSessionLocal = async_sessionmaker(
@@ -21,6 +23,7 @@ AsyncSessionLocal = async_sessionmaker(
 
 class Base(DeclarativeBase):
     """Base class for all SQLAlchemy models in the project."""
+
     pass
 
 
