@@ -8,6 +8,7 @@ class QuestionCreate(BaseModel):
         min_length=5,
     )
 
+
 # Схема для чтения вопроса (ответ сервера)
 class QuestionResponse(BaseModel):
     id: int

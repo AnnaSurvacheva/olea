@@ -10,10 +10,7 @@ from questions.use_cases.get_daily_question import get_daily_question
 from questions.infrastructure.repositories.question_repository import QuestionRepository
 from questions.use_cases.list_questions import ListQuestionsUseCase
 
-router = APIRouter(
-    prefix="/question",
-    tags=["Questions"]
-)
+router = APIRouter(prefix="/question", tags=["Questions"])
 
 
 @router.get("/daily/")
@@ -31,19 +28,12 @@ from questions.infrastructure.repositories.question_repository import QuestionRe
 from questions.use_cases.create_question import CreateQuestionUseCase
 
 
-router = APIRouter(
-    prefix="/questions",
-    tags=["Questions"]
-)
+router = APIRouter(prefix="/questions", tags=["Questions"])
 
 
-@router.post(
-    "/create/",
-    response_model=QuestionResponse
-)
+@router.post("/create/", response_model=QuestionResponse)
 async def create_question(
-    question: QuestionCreate,
-    session: AsyncSession = Depends(get_session)
+    question: QuestionCreate, session: AsyncSession = Depends(get_session)
 ):
     repository = QuestionRepository(session)
 
@@ -54,14 +44,10 @@ async def create_question(
     return created_question
 
 
-@router.get(
-    "/list",
-    response_model=list[QuestionResponse]
-)
+@router.get("/list", response_model=list[QuestionResponse])
 async def list_questions(
     session: AsyncSession = Depends(get_session),
 ):
-    repository =  QuestionRepository(session)
+    repository = QuestionRepository(session)
     use_case = ListQuestionsUseCase(repository)
     return await use_case.execute()
-

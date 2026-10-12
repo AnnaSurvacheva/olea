@@ -8,7 +8,6 @@ logger = logging.getLogger(__name__)
 
 
 class ListQuestionsUseCase:
-
     def __init__(self, repository: QuestionRepository):
         self.repository = repository
 
