@@ -14,12 +14,6 @@ class InvalidTimezone(UserError):
         super().__init__(f"Time zone {self.value} not found")
 
 
-class EmailAlreadyTaken(UserError):
-    def __init__(self, email: str) -> None:
-        self.email = email
-        super().__init__(f"Email {email} is already registered")
-
-
 class InvalidCredentials(UserError):
     def __init__(self) -> None:
         super().__init__("Invalid email or password")

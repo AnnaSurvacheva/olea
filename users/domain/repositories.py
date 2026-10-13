@@ -26,6 +26,15 @@ class UserRepository(Protocol):
     Use cases depend on this protocol, not on a concrete database.
     The real implementation lives in the infrastructure layer.
     """
+    async def create(
+        self, email: str, hashed_password: str, timezone: str
+    ) -> User:
+        """Save a new user and return it."""
+        ...
+        
+    async def get_by_email(self, email: str) -> User | None:
+        """Return the user with the given email, or None if not found."""
+        ...
 
     async def get(self, user_id: int) -> User | None:
         """Return the user with the given id, or None if not found."""
