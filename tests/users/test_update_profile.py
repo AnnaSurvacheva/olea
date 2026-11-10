@@ -43,4 +43,3 @@ async def test_raises_user_not_found_when_user_is_missing() -> None:
 
     with pytest.raises(UserNotFound):
         await use_case.execute(99, {"display_name": "Anna"})
-

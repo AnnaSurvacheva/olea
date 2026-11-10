@@ -6,6 +6,7 @@ SQLAlchemy, FastAPI or anything from the infrastructure layer.
 
 from typing import Protocol, TypedDict
 
+from auth.domain.entities.user_credentials import UserCredentials
 from users.domain.entities.user import User
 
 
@@ -27,6 +28,14 @@ class UserRepository(Protocol):
     The real implementation lives in the infrastructure layer.
     """
 
+    async def create(self, email: str, hashed_password: str, timezone: str) -> User:
+        """Save a new user and return it."""
+        ...
+
+    async def get_by_email(self, email: str) -> User | None:
+        """Return the user with the given email, or None if not found."""
+        ...
+
     async def get(self, user_id: int) -> User | None:
         """Return the user with the given id, or None if not found."""
         ...
@@ -42,5 +51,23 @@ class UserRepository(Protocol):
         """Delete the user.
 
         Return True if the user was deleted, False if not found.
+        """
+        ...
+    async def get_credentials_by_email(
+    self, email: str
+    ) -> UserCredentials | None:
+        """Return user credentials for the given email address.
+
+        Returns ``None`` if no user with the specified email exists.
+        """
+        ...
+
+
+    async def update_password_hash(
+        self, user_id: int, hashed_password: str
+    ) -> None:
+        """Update the stored password hash for the specified user.
+
+        The provided password must already be securely hashed.
         """
         ...

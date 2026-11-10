@@ -1,10 +1,12 @@
-from questions.infrastructure.repositories.question_repository import QuestionRepository
-from questions.infrastructure.models import QuestionModel
+from datetime import date
+
+from questions.domain.entities.question import Question
+from questions.domain.repositories import QuestionRepository
 
 
 class CreateQuestionUseCase:
-    def __init__(self, repository: QuestionRepository):
+    def __init__(self, repository: QuestionRepository) -> None:
         self.repository = repository
 
-    async def execute(self, question: str) -> QuestionModel:
-        return await self.repository.create(question)
+    async def execute(self, question: str, for_day: date) -> Question:
+        return await self.repository.create(question, for_day)

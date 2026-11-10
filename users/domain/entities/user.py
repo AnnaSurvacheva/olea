@@ -9,3 +9,4 @@ class User:
     display_name: str | None
     timezone: str
     created_at: datetime
+    role: str = "user"

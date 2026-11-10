@@ -1,19 +1,16 @@
 import logging
 
-
-from questions.infrastructure.repositories.question_repository import QuestionRepository
-from questions.infrastructure.models import QuestionModel
+from questions.domain.entities.question import Question
+from questions.domain.repositories import QuestionRepository
 
 logger = logging.getLogger(__name__)
 
 
 class ListQuestionsUseCase:
-    def __init__(self, repository: QuestionRepository):
+    def __init__(self, repository: QuestionRepository) -> None:
         self.repository = repository
 
-    async def execute(self):
-        questions = await self.repository.get_all_question()
-        if not questions:
-            raise Exception("Questions not found")
+    async def execute(self) -> list[Question]:
+        questions = await self.repository.get_all_questions()
         logger.info("Получено вопросов: %s", len(questions))
         return questions
