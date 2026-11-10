@@ -11,4 +11,5 @@ def to_entity(model: UsersModel) -> User:
         display_name=model.display_name,
         timezone=model.timezone,
         created_at=model.created_at,
+        role=model.role,
     )

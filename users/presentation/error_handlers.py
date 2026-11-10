@@ -4,7 +4,6 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 from users.domain.exceptions import (
-    InvalidCredentials,
     InvalidTimezone,
     UserNotFound,
 )
@@ -37,9 +36,4 @@ def register_user_error_handlers(app: FastAPI) -> None:
             },
         )
 
-
-    @app.exception_handler(InvalidCredentials)
-    async def handle_invalid_credentials(
-        request: Request, error: InvalidCredentials
-    ) -> JSONResponse:
-        return JSONResponse(status_code=401, content={"detail": str(error)})
+   

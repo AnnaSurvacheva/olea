@@ -1,5 +1,6 @@
 """Shared fixtures for tests that need a real database."""
 
+import os
 from collections.abc import AsyncIterator
 
 import pytest
@@ -11,7 +12,10 @@ from core.database import Base
 from questions.infrastructure.models import QuestionModel  # noqa: F401
 from users.infrastructure.models import UsersModel  # noqa: F401
 
-TEST_DATABASE_URL = "postgresql+asyncpg://anna@localhost:5432/reflection_db_test"
+TEST_DATABASE_URL = os.getenv(
+    "TEST_DATABASE_URL",
+    "postgresql+asyncpg://localhost:5432/reflection_db_test",
+)
 
 
 @pytest.fixture

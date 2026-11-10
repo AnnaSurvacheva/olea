@@ -9,7 +9,7 @@ venv/
 # --- Переменные окружения и секреты ---
 .env
 .env.*
-!.env.example
+
 
 # --- Логи приложения (core/logging_config.py пишет в logs/app.log) ---
 logs/

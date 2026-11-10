@@ -1,5 +1,7 @@
 """Integration test for the DeleteAccount use case (needs PostgreSQL)."""
 
+from datetime import date
+
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -24,7 +26,11 @@ async def test_delete_account_removes_user_and_related_data(
         [
             UsersModel(id=1, email="anna@example.com", role="user"),
             UsersModel(id=2, email="other@example.com", role="user"),
-            QuestionModel(id=1, question="What made you happy today?"),
+            QuestionModel(
+                id=1,
+                question="What made you happy today?",
+                for_day=date.today(),
+            ),
         ]
     )
     await session.flush()

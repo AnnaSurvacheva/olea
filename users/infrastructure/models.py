@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import DateTime, String, func
+from sqlalchemy import DateTime, Index, String, func, text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from core.database import Base
@@ -8,6 +8,10 @@ from core.database import Base
 
 class UsersModel(Base):
     __tablename__ = "users"
+
+    __table_args__ = (
+        Index("ix_users_email_lower", func.lower(text("email")), unique=True),
+    )
 
     id: Mapped[int] = mapped_column(
         primary_key=True,

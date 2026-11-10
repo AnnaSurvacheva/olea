@@ -1,17 +1,18 @@
 from sqlalchemy.ext.asyncio import (
-    create_async_engine,
     AsyncSession,
     async_sessionmaker,
+    create_async_engine,
 )
 from sqlalchemy.orm import DeclarativeBase
 
+from core.settings import DatabaseSettings
 
-DATABASE_URL = "postgresql+asyncpg://anna@localhost:5432/reflection_db"
-
+DATABASE_URL = DatabaseSettings().database_url
 
 engine = create_async_engine(
-    DATABASE_URL, echo=True
-)  # echo=True: SQL в консоль, потом можно убрать
+    DATABASE_URL,
+    hide_parameters=True,
+)
 
 
 AsyncSessionLocal = async_sessionmaker(
@@ -24,7 +25,6 @@ AsyncSessionLocal = async_sessionmaker(
 class Base(DeclarativeBase):
     """Base class for all SQLAlchemy models in the project."""
 
-    pass
 
 
 async def get_session():

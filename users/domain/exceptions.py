@@ -13,7 +13,3 @@ class InvalidTimezone(UserError):
         self.value = value
         super().__init__(f"Time zone {self.value} not found")
 
-
-class InvalidCredentials(UserError):
-    def __init__(self) -> None:
-        super().__init__("Invalid email or password")
