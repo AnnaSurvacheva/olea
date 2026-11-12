@@ -6,6 +6,7 @@ from fastapi.responses import JSONResponse
 from auth.domain.exceptions import (
     EmailAlreadyRegistered,
     InvalidCredentials,
+    InvalidRefreshToken,
     WeakPassword,
 )
 
@@ -33,5 +34,17 @@ def register_auth_error(app: FastAPI) -> None:
         return JSONResponse(
             status_code=401,
             content={"detail": str(error)},
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    @app.exception_handler(InvalidRefreshToken)
+    async def handle_invalid_refresh_token(
+        request: Request,
+        error: InvalidRefreshToken,
+    ) -> JSONResponse:
+        """Return one generic response for every invalid refresh state."""
+        return JSONResponse(
+            status_code=401,
+            content={"detail": "Invalid refresh token"},
             headers={"WWW-Authenticate": "Bearer"},
         )

@@ -1,6 +1,6 @@
 """Application settings loaded from the environment."""
 
-from pydantic import SecretStr
+from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -32,6 +32,8 @@ class Settings(BaseSettings):
     jwt_secret_key: SecretStr
     jwt_issuer: str = "ai-psychologist-backend"
     access_token_ttl_minutes: int = 15
+    refresh_token_ttl_days: int = Field(default=30, gt=0)
+    revoked_refresh_token_retention_days: int = Field(default=30, gt=0)
 
     dummy_password_hash: str
 

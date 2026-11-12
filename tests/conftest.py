@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.pool import NullPool
 
 from answers.infrastructure.model import AnswerModel  # noqa: F401
+from auth.infrastructure.models import RefreshTokenModel  # noqa: F401
 from core.database import Base
 from questions.infrastructure.models import QuestionModel  # noqa: F401
 from users.infrastructure.models import UsersModel  # noqa: F401
