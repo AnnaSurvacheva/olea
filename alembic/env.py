@@ -4,6 +4,7 @@ from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 import answers.infrastructure.model  # noqa: F401
+import auth.infrastructure.models  # noqa: F401
 import questions.infrastructure.models  # noqa: F401
 import users.infrastructure.models  # noqa: F401
 from alembic import context

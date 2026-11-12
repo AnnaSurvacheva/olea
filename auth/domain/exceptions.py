@@ -22,3 +22,10 @@ class InvalidCredentials(AuthError):
 class InvalidToken(AuthError):
     def __init__(self) -> None:
         super().__init__("Invalid or expired access token")
+
+
+class InvalidRefreshToken(AuthError):
+    """Represent every refresh-token validation failure with one safe message."""
+
+    def __init__(self) -> None:
+        super().__init__("Invalid refresh token")

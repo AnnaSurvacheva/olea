@@ -2,6 +2,8 @@
 
 from typing import Protocol
 
+from auth.domain.entities.refresh_token import GeneratedRefreshToken
+
 
 class PasswordHasher(Protocol):
     """Turns a password into a hash and checks a password against a hash."""
@@ -39,4 +41,41 @@ class TokenService(Protocol):
 
         Raises InvalidToken if the token is invalid or expired.
         """
+        ...
+
+
+class RefreshTokenService(Protocol):
+    """Creates opaque refresh tokens and their one-way storage digests."""
+
+    def generate(self) -> GeneratedRefreshToken:
+        """Return a fresh opaque token and its SHA-256 hexadecimal digest."""
+        ...
+
+    def hash_token(self, plain_token: str) -> str:
+        """Return the SHA-256 hexadecimal digest for a presented token."""
+        ...
+
+
+class UnitOfWork(Protocol):
+    """Controls commit and rollback for one application operation."""
+
+    async def commit(self) -> None:
+        """Commit the active database transaction."""
+        ...
+
+    async def rollback(self) -> None:
+        """Roll back the active database transaction."""
+        ...
+
+
+class SecurityEventLogger(Protocol):
+    """Writes security-relevant authentication events without credentials."""
+
+    def log_refresh_token_reuse(
+        self,
+        family_id: str,
+        user_id: int,
+        occurred_at: str,
+    ) -> None:
+        """Record a refresh-token reuse event without logging the token."""
         ...
